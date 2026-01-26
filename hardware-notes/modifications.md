@@ -50,10 +50,29 @@
 - **PID Bed:** Kp=39.046, Ki=0.264, Kd=1445.179
 - **Skew correction:** Enabled (xy_skew=0.00767)
 
+## Calibration Status
+
+Current calibration values. For detailed procedures, see [Calibration Checklist](../docs/CALIBRATION_CHECKLIST.md).
+
+| Calibration | Status | Value | Notes |
+|-------------|--------|-------|-------|
+| PID Hotend | Done | Kp=18.730, Ki=0.821, Kd=106.760 | Target 200°C |
+| PID Bed | Done | Kp=39.046, Ki=0.264, Kd=1445.179 | Target 60°C |
+| Z Offset | Done | 1.107mm | GL-8H + PEI |
+| Bed Mesh | Done | default profile | Via KAMP adaptive |
+| Rotation X/Y | Done | 40.115mm | Via Califlower |
+| Rotation E | Done | 20.925mm | 66:22 gear ratio |
+| Skew XY | Done | 0.00767 | Minimal correction |
+| Input Shaper | Pending | - | Needs ADXL345 mount |
+| Pressure Advance | Pending | - | Per filament |
+| Probe Accuracy | Pending | - | Verify GL-8H |
+
 ## Planned Modifications
 
 - [ ] Evaluate BTT Microprobe V2 for better Z probing accuracy with PEI
 - [ ] Add webcam for monitoring and timelapse
+- [ ] Mount ADXL345 for Input Shaper
+- [ ] LED lighting for camera
 
 ## References
 

@@ -5,6 +5,19 @@ All notable hardware and software modifications to Yumi are documented here.
 ## [Unreleased]
 <!-- Add new modifications here before they are committed -->
 
+## 2026-01-26 - Documentation & Roadmap
+
+### Software
+- Added `docs/CALIBRATION_CHECKLIST.md` - Complete calibration procedures and status
+- Added `docs/ROADMAP.md` - Phased plan to BambuLab experience
+- Updated `hardware-notes/modifications.md` with calibration status table
+- Updated `README.md` with roadmap progress
+- Updated `CLAUDE.md` with docs links and calibration status
+
+### Notes
+- Calibration ~45% complete (PID, E-steps, Z-offset, Bed Mesh, Skew done)
+- Priority next: Input Shaper (needs ADXL345 mount), Probe Accuracy test
+
 ---
 
 ## 2026-01-26 - Initial Setup

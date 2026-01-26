@@ -34,10 +34,20 @@ Project to convert an Artillery Sidewinder X1 into a reliable, precise, and sile
 **Software:**
 - KAMP: Adaptive mesh enabled, custom purge line macro
 
+## Calibration Status
+
+~45% complete. See [Calibration Checklist](docs/CALIBRATION_CHECKLIST.md) for details.
+
+**Completed:** PID, E-steps, Z-offset, Bed Mesh, Skew
+**Pending:** Input Shaper (highest priority), Probe Accuracy, PA, Flow, Retraction
+
 ## Repository Structure
 
 ```
 yumi/
+├── docs/              # Project documentation
+│   ├── CALIBRATION_CHECKLIST.md  # Calibration procedures and status
+│   └── ROADMAP.md                # Path to BambuLab experience
 ├── klipper/           # Klipper configurations
 │   ├── printer.cfg    # Main printer config
 │   ├── moonraker.cfg  # Moonraker config
