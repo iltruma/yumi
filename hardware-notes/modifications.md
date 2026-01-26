@@ -28,6 +28,11 @@
 - **Mode:** Standalone (hardware configuration via jumpers)
 - **Notes:** Silent operation, no UART control
 
+### Z Axis Upgrades
+- **Leadscrew couplers:** Upgraded flexible couplers (TH3D style)
+- **Anti-backlash nuts:** Installed
+- **Notes:** Reduces Z wobble and eliminates backlash for better layer consistency
+
 ### Webcam
 - **Status:** Planned
 - **Notes:** Crowsnest pre-configured for future installation

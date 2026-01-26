@@ -22,6 +22,7 @@ Project to convert an Artillery Sidewinder X1 into a reliable, precise, and sile
 - PEI magnetic bed
 - Linear rails on X and Y axes
 - Inductive Z sensor GL-8H (some inconsistency with PEI, evaluating BTT Microprobe V2)
+- Z axis: upgraded leadscrew couplers + anti-backlash nuts
 
 **Components:**
 - Extruder: Stock Artillery (gear ratio 66:22)
@@ -48,6 +49,18 @@ yumi/
 │   └── process/       # Print process profiles
 └── hardware-notes/    # Hardware modification notes
 ```
+
+## Session Start Checklist
+
+**At the beginning of each session, always ask:**
+> "Hai fatto modifiche hardware o software alla stampante dall'ultima volta?"
+
+If yes, update:
+1. `CHANGELOG.md` - Add dated entry with details
+2. `hardware-notes/modifications.md` - Update component status
+3. `CLAUDE.md` - Update Hardware Setup if significant
+
+---
 
 ## Development Guidelines
 

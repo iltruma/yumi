@@ -30,6 +30,7 @@ Project to convert an **Artillery Sidewinder X1** into a reliable, precise, and 
 - `klipper/` - Klipper, Moonraker configs and macros
 - `orca-slicer/` - Printer, filament, and process profiles
 - `hardware-notes/` - Hardware modification notes
+- `CHANGELOG.md` - Chronological log of all modifications
 
 ## License
 
