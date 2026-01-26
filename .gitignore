@@ -1,0 +1,22 @@
+# Klipper
+*.bak
+*.backup
+printer-*.cfg
+klippy.log
+moonraker.log
+
+# Orca Slicer temp files
+*.3mf.bak
+*.gcode
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Secrets (mai committare!)
+*.secret
+*credentials*
