@@ -2,8 +2,12 @@
 *.bak
 *.backup
 printer-*.cfg
+backup_*.cfg
 klippy.log
 moonraker.log
+
+# Windows Zone.Identifier files
+*:Zone.Identifier
 
 # Orca Slicer temp files
 *.3mf.bak

@@ -49,6 +49,14 @@ yumi/
 - Separate macros into dedicated files by category
 - Always test on dry-run before applying critical changes
 
+### Security
+- **ALWAYS check for sensitive information before committing:**
+  - Passwords, tokens, API keys
+  - Private IP addresses (specific, not RFC1918 ranges)
+  - SSH keys or credentials
+  - Scan configs with: `grep -ri "password\|token\|api_key\|secret" klipper/config/`
+- Never commit files containing secrets or credentials
+
 ### Orca Slicer Profiles
 - Name profiles with `yumi_` prefix to distinguish them
 - Document differences from stock profiles
