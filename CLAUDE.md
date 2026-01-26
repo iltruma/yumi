@@ -20,10 +20,18 @@ Project to convert an Artillery Sidewinder X1 into a reliable, precise, and sile
 
 **Modifications:**
 - PEI magnetic bed
-- Linear rails
-- Inductive Z sensor GL-8H (evaluating BTT Microprobe V2)
+- Linear rails on X and Y axes
+- Inductive Z sensor GL-8H (some inconsistency with PEI, evaluating BTT Microprobe V2)
 
-**Controller:** Raspberry Pi with Klipper
+**Components:**
+- Extruder: Stock Artillery (gear ratio 66:22)
+- Drivers: TMC2208 in standalone mode
+- Webcam: Planned
+
+**Controller:** Raspberry Pi with Klipper + Mainsail
+
+**Software:**
+- KAMP: Adaptive mesh enabled, custom purge line macro
 
 ## Repository Structure
 
