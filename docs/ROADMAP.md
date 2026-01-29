@@ -28,7 +28,7 @@ Overall Progress        [===-------] ~25%
 - [x] Z sensor (GL-8H inductive)
 - [x] Upgraded leadscrew couplers
 - [x] Anti-backlash nuts
-- [ ] Belt tension verification
+- [x] Belt tension verification (2026-01-28)
 
 ### Software
 - [x] Klipper installed and configured
@@ -42,7 +42,7 @@ Overall Progress        [===-------] ~25%
 - [x] Bed mesh
 - [x] E-steps / rotation distance (20.925mm)
 - [x] Skew correction (0.00767)
-- [ ] Probe accuracy test
+- [x] Probe accuracy test (2026-01-28 - GL-8H: range 0.0125mm, std dev 0.0035mm)
 - [ ] First layer test print
 
 ### Status: Near Complete

@@ -5,6 +5,38 @@ All notable hardware and software modifications to Yumi are documented here.
 ## [Unreleased]
 <!-- Add new modifications here before they are committed -->
 
+## 2026-01-29 - Input Shaper Calibration
+
+### Hardware
+- KUSBA v2.1 accelerometer mounted on toolhead (ADXL345 via USB)
+
+### Calibrations
+- Input Shaper completed for all axes:
+  - X: mzv @ 54.8 Hz
+  - Y: mzv @ 23.0 Hz
+  - Z: 3hump_ei @ 77.6 Hz
+- max_accel updated: 1550 mm/s² (was 1000)
+- max_z_accel updated: 1550 mm/s² (was 100)
+
+### Notes
+- Y frequency lower than X due to bed mass (bed slinger design)
+- Ringing/ghosting should be significantly reduced
+- Ready for Pressure Advance calibration next
+
+## 2026-01-28 - Belt Tensioning
+
+### Hardware
+- Tensioned all belts: X, Y, and Z axes
+
+### Calibrations
+- Probe Accuracy test: PASSED (range 0.0125mm, std dev 0.0035mm)
+  - GL-8H inductive sensor confirmed reliable on PEI surface
+
+### Notes
+- Belt tension was the last pending hardware item in Phase 1
+- Rotation Distance X/Y (40.115mm) and Skew (0.00767) should be re-verified after belt changes
+- Input Shaper calibration (Phase 2) should be done after this mechanical change
+
 ## 2026-01-26 - Documentation & Roadmap
 
 ### Software

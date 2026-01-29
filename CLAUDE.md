@@ -21,12 +21,13 @@ Project to convert an Artillery Sidewinder X1 into a reliable, precise, and sile
 **Modifications:**
 - PEI magnetic bed
 - Linear rails on X and Y axes
-- Inductive Z sensor GL-8H (some inconsistency with PEI, evaluating BTT Microprobe V2)
+- Inductive Z sensor GL-8H (verified accurate on PEI: range 0.0125mm, std dev 0.0035mm)
 - Z axis: upgraded leadscrew couplers + anti-backlash nuts
 
 **Components:**
 - Extruder: Stock Artillery (gear ratio 66:22)
 - Drivers: TMC2208 in standalone mode
+- Accelerometer: KUSBA v2.1 (ADXL345 via USB)
 - Webcam: Planned
 
 **Controller:** Raspberry Pi with Klipper + Mainsail
@@ -36,10 +37,10 @@ Project to convert an Artillery Sidewinder X1 into a reliable, precise, and sile
 
 ## Calibration Status
 
-~45% complete. See [Calibration Checklist](docs/CALIBRATION_CHECKLIST.md) for details.
+~60% complete. See [Calibration Checklist](docs/CALIBRATION_CHECKLIST.md) for details.
 
-**Completed:** PID, E-steps, Z-offset, Bed Mesh, Skew
-**Pending:** Input Shaper (highest priority), Probe Accuracy, PA, Flow, Retraction
+**Completed:** PID, E-steps, Z-offset, Bed Mesh, Skew, Probe Accuracy, Input Shaper
+**Pending:** PA (highest priority), Flow, Retraction, Temperature Tower
 
 ## Repository Structure
 

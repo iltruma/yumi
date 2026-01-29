@@ -13,7 +13,7 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 ## Mechanical Calibrations
 
 ### Belt Tension Check
-- **Status:** [ ] Pending
+- **Status:** [x] Completed (2026-01-28)
 - **Priority:** High
 - **Command:** Manual measurement
 - **Procedure:**
@@ -25,7 +25,7 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 - **Redo when:** After any work on X/Y mechanics, if print quality degrades
 
 ### Probe Accuracy Test
-- **Status:** [ ] Pending
+- **Status:** [x] Completed (2026-01-28)
 - **Priority:** High
 - **Command:** `PROBE_ACCURACY`
 - **Procedure:**
@@ -33,8 +33,13 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
   2. Wait 10 minutes for thermal expansion to stabilize
   3. Run: `PROBE_ACCURACY SAMPLES=10`
 - **Expected:** Range < 0.025mm, Standard deviation < 0.010mm
+- **Results (2026-01-28):**
+  - Maximum: 1.147000, Minimum: 1.134500
+  - Range: 0.0125mm (excellent, well below 0.025mm threshold)
+  - Average: 1.144000, Median: 1.144500
+  - Standard deviation: 0.0035mm (excellent, well below 0.010mm threshold)
 - **Current sensor:** GL-8H inductive
-- **Notes:** If range > 0.05mm, consider BTT Microprobe V2
+- **Notes:** GL-8H performs well on PEI surface, no need to replace
 - **Redo when:** Sensor change, after crashes, if first layer inconsistent
 
 ---
@@ -119,18 +124,26 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 - **Redo when:** Extruder gear change, gear wear
 
 ### Input Shaper
-- **Status:** [ ] Pending
+- **Status:** [x] Completed (2026-01-29)
 - **Priority:** HIGH - Biggest quality improvement
 - **Command:** `SHAPER_CALIBRATE`
-- **Requirements:**
-  - ADXL345 accelerometer (owned, needs mounting)
+- **Hardware:** KUSBA v2.1 (ADXL345 via USB)
 - **Procedure:**
   1. Mount ADXL345 securely on toolhead
   2. Configure SPI connection in printer.cfg
   3. Run: `SHAPER_CALIBRATE AXIS=X`
   4. Run: `SHAPER_CALIBRATE AXIS=Y`
   5. Save with `SAVE_CONFIG`
-- **Expected:** Recommended shaper type and frequency per axis
+- **Results (2026-01-29):**
+  | Axis | Shaper | Frequency |
+  |------|--------|-----------|
+  | X | mzv | 54.8 Hz |
+  | Y | mzv | 23.0 Hz |
+  | Z | 3hump_ei | 77.6 Hz |
+- **Recommended max_accel:** 1550 mm/s²
+- **Notes:**
+  - Y frequency is lower than X, likely due to bed mass on Y axis (bed slinger design)
+  - Z shaper optional but configured
 - **Benefits:** Eliminates ringing/ghosting, allows higher speeds
 - **Redo when:** After major mechanical changes
 
