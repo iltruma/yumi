@@ -1,26 +1,10 @@
-# Klipper
+.env
+secrets.conf
+*.swp
+*.tmp
+printer-[0-9]*_[0-9]*.cfg
 *.bak
-*.backup
-printer-*.cfg
-backup_*.cfg
-klippy.log
-moonraker.log
-
-# Windows Zone.Identifier files
-*:Zone.Identifier
-
-# Orca Slicer temp files
-*.3mf.bak
-*.gcode
-
-# OS
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-
-# Secrets (mai committare!)
-*.secret
-*credentials*
+*.bkp
+*.csv
+*.zip
+ShakeTune_results
