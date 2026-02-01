@@ -153,11 +153,12 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 - **Priority:** Low (reliability > speed)
 - **Reference:** [Ellis Guide - Max Speeds](https://ellis3dp.com/Print-Tuning-Guide/articles/determining_max_speeds_accels.html)
 - **Test Results:**
-  | Parameter | Tested Max | Configured (with margin) |
-  |-----------|------------|--------------------------|
-  | max_accel | 2500 mm/s² | 2100 mm/s² |
+  | Parameter | Tested Max | Configured |
+  |-----------|------------|------------|
+  | max_accel | 2500 mm/s² | 2100 mm/s² (15% margin) |
   | max_z_accel | - | 2100 mm/s² |
-  | max_velocity | 200 mm/s | 200 mm/s (not tested) |
+  | max_velocity | 200 mm/s | 200 mm/s (at limit) |
+- **Velocity test details:** 250 fail, 220 fail, 200 OK
 - **Procedure:**
   1. Complete Input Shaper first
   2. Set `max_velocity` to a known safe value
