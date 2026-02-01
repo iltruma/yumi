@@ -105,8 +105,9 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 ## Motion Calibrations
 
 ### Rotation Distance X/Y
-- **Status:** [x] Completed (via Califlower)
-- **Current value:** 40.115mm
+- **Status:** [x] Completed (2026-02-01 via Calistar)
+- **Current value:** 39.920mm
+- **Calibration method:** Calistar calibration cube
 - **Expected:** Movement matches commanded distance
 - **Redo when:** Belt/pulley changes
 
@@ -119,7 +120,7 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
   3. Extrude 100mm: `G1 E100 F100`
   4. Measure remaining distance
   5. Calculate: `new_rd = old_rd * (100 / actually_extruded)`
-- **Current value:** 20.925mm
+- **Current value:** 20.316mm (gear_ratio 66:22)
 - **Expected:** 100mm commanded = 100mm extruded (±0.5mm)
 - **Redo when:** Extruder gear change, gear wear
 
@@ -360,14 +361,15 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 ## Dimensional Calibrations
 
 ### Skew Calibration
-- **Status:** [x] Completed
+- **Status:** [x] Completed (2026-02-01 via Calistar)
 - **Command:** `SET_SKEW`
 - **Procedure:**
   1. Print skew calibration square
   2. Measure diagonals AC and BD
   3. Calculate skew value
   4. Add to config: `SET_SKEW XY=value`
-- **Current value:** xy_skew=0.00767
+- **Current value:** xy_skew=0.00787409559382246
+- **Calibration method:** Calistar calibration cube
 - **Expected:** Diagonals within 0.5mm of each other
 - **Redo when:** Frame adjustments, mechanical changes
 
