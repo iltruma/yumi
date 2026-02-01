@@ -150,11 +150,18 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 ### Max Velocity/Acceleration Test
 - **Status:** [ ] Pending
 - **Priority:** Low (reliability > speed)
+- **Reference:** [Ellis Guide - Max Speeds](https://ellis3dp.com/Print-Tuning-Guide/articles/determining_max_speeds_accels.html)
 - **Procedure:**
   1. Complete Input Shaper first
-  2. Print speed test models increasing velocity
-  3. Listen for layer shifts or quality degradation
-  4. Set conservative limits below failure point
+  2. Set `max_velocity` to a known safe value
+  3. Use `TEST_SPEED` macro increasing acceleration until skipping
+  4. Run extended test (50 iterations) near the limit
+  5. Set final value 15% below maximum found
+  6. Repeat process for velocity using Prusa calculator
+- **Notes:**
+  - Heat printer fully before testing
+  - Maximum values may not be practical for daily printing
+  - Input Shaper already provides recommended max_accel
 - **Redo when:** After Input Shaper, mechanical upgrades
 
 ---
@@ -164,37 +171,79 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 ### Pressure Advance
 - **Status:** [ ] Pending
 - **Priority:** HIGH - Better corners and reduced stringing
+- **Reference:** [Ellis Guide - Pressure Advance](https://ellis3dp.com/Print-Tuning-Guide/articles/pressure_linear_advance/introduction.html)
 - **Command:** `SET_PRESSURE_ADVANCE ADVANCE=X`
-- **Procedure:**
-  1. Print pressure advance tower
-  2. Find line with sharpest corners
-  3. Calculate PA value from line number
-  4. Add to filament profile in slicer
-- **Expected range:** 0.02-0.08 for direct drive
-- **Notes:** Different for each filament type
-- **Redo when:** Different filament, nozzle change
+- **Methods (in order of recommendation):**
+  1. **Pattern Method** (most accurate) - Print test pattern, measure best section
+  2. **Tower Method** (easier) - Print tower with varying PA values
+  3. ~~Lines Method~~ (deprecated)
+- **Procedure (Pattern Method):**
+  1. Set starting PA to 0
+  2. Print PA pattern from Klipper docs or Ellis guide
+  3. Find section with sharpest corners, no bulging
+  4. Calculate PA from line number
+  5. Test with `SET_PRESSURE_ADVANCE ADVANCE=X`
+  6. Add to printer.cfg or filament profile in slicer
+- **Expected range:** 0.02-0.08 for direct drive, 0.4-1.0 for bowden
+- **What PA fixes:**
+  - Bulging at corners (PA too low)
+  - Gaps at corners (PA too high)
+  - Inconsistent line width during speed changes
+- **Factors affecting PA:** Filament type, nozzle size, temperature, input shaper
+- **Notes:** Different for each filament type, save per-filament in slicer
+- **Redo when:** Different filament, nozzle change, hotend change
 
-### Flow Rate
+### Extrusion Multiplier (Flow Rate)
 - **Status:** [ ] Pending
-- **Priority:** Medium - Dimensional accuracy
-- **Procedure:**
-  1. Print single-wall cube (no infill)
-  2. Measure wall thickness
-  3. Adjust flow: `new_flow = (expected / measured) * current_flow`
-- **Expected:** Wall thickness matches nozzle diameter
-- **Notes:** Start at 100%, typical adjustment 95-98%
+- **Priority:** HIGH - Dimensional accuracy and surface quality
+- **Reference:** [Ellis Guide - Extrusion Multiplier](https://ellis3dp.com/Print-Tuning-Guide/articles/extrusion_multiplier.html)
+- **Procedure (Ellis Method):**
+  1. Slice 30x30x3mm cubes with EM variations of 1-2% (e.g., 0.96, 0.98, 1.00)
+  2. Settings:
+     - Infill: 30%+ at moderate speed
+     - Top layers: maximum possible with 2+ solid infill layers below
+     - Top pattern: "Monotonic" (SuperSlicer) or "Lines" (Cura)
+     - Top solid speed: low/moderate (~60mm/s)
+     - Fan: moderate-high
+  3. Print all cubes together
+  4. Evaluate top surface by touch and sight
+  5. Correct EM: surface feels smooth, no gaps between lines
+  6. If needed, repeat with 0.5% increments
+- **Evaluation tips:**
+  - Inspect CENTER of cubes, not edges
+  - "A bit too high is better than a bit too low"
+  - Look for: gaps (too low), rough/bumpy (too high)
+- **Expected:** Smooth top surface, typical final value 0.95-0.98
+- **Notes:** Different for each filament brand/type/color
 - **Redo when:** Different filament brand/type
 
 ### Retraction
 - **Status:** [ ] Pending
 - **Priority:** Medium - Stringing prevention
-- **Procedure:**
-  1. Print retraction tower
-  2. Vary distance (0.5-2mm for direct drive)
-  3. Vary speed (25-45mm/s)
-  4. Find settings with minimal stringing
-- **Expected range:** 0.8-1.5mm distance, 35mm/s speed (direct drive)
-- **Redo when:** Different filament, bowden changes
+- **Reference:** [Ellis Guide - Retraction](https://ellis3dp.com/Print-Tuning-Guide/articles/retraction.html)
+- **Starting values:**
+  - Direct drive: 0.5mm @ 35mm/s
+  - Bowden: 1.0mm @ 35mm/s
+- **Procedure (Ellis Method):**
+  1. Clean nozzle thoroughly
+  2. Set fan to 80-100%
+  3. Use SuperSlicer "extruder retraction calibration" or similar tower
+  4. Configure test:
+     - Start temp: 10°C higher than normal
+     - Increment: 0.1mm (direct) or 0.5mm (bowden)
+     - Print 3 towers at different temps (10°C apart)
+  5. Arrange towers from hottest to coldest on bed
+  6. Print and analyze
+- **Evaluation:**
+  - Count rings from base where stringing stops
+  - Choose value 1-2 rings ABOVE where stringing disappears (safety margin)
+- **Expected range:**
+  - Direct drive: 0.5-1.5mm distance, 30-35mm/s speed
+  - Bowden: 1.0-6.0mm distance, 30-35mm/s speed
+- **Notes:**
+  - Temperature affects stringing significantly
+  - Manage in slicer for per-filament control
+- **Redo when:** Different filament, bowden tube changes
 
 ### Temperature Tower
 - **Status:** [ ] Pending
@@ -209,6 +258,102 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
      - Overhangs
 - **Notes:** Required for each new filament
 - **Redo when:** New filament brand/type/color
+
+### Maximum Volumetric Flow Rate
+- **Status:** [ ] Pending
+- **Priority:** HIGH - Prevents under-extrusion at high speeds
+- **Reference:** [Ellis Guide - Max Volumetric Flow](https://ellis3dp.com/Print-Tuning-Guide/articles/determining_max_volumetric_flow_rate.html)
+- **What it is:** Maximum plastic volume (mm³/s) your hotend can melt
+- **Why it matters:** Exceeding this limit causes under-extrusion, grinding, skipping
+- **Procedure:**
+  1. Heat hotend to printing temperature
+  2. Mark 100mm of filament with tape
+  3. Extrude at increasing speeds (mm/min = mm/s × 60)
+  4. At each speed, verify ~100mm enters extruder
+  5. Note speed where it starts falling short
+  6. Convert to volumetric: `mm³/s = mm/s × 2.4` (for 1.75mm filament)
+- **Typical values:**
+  - Stock hotend (V6 style): 8-12 mm³/s
+  - High-flow hotend (Volcano, Dragon HF): 15-25 mm³/s
+  - CHT nozzle: +30-50% over standard
+- **How to use:**
+  - Set in slicer as "Max volumetric speed" limit
+  - Or calculate max print speed: `speed = volumetric_flow / (layer_height × line_width)`
+- **Notes:**
+  - Higher temps = higher flow (with tradeoffs)
+  - Use value slightly below test results
+- **Redo when:** Hotend change, nozzle change, different filament type
+
+---
+
+## Cooling Calibrations
+
+### Cooling and Layer Times
+- **Status:** [ ] Pending
+- **Priority:** Medium - Prevents overheating on small parts
+- **Reference:** [Ellis Guide - Cooling](https://ellis3dp.com/Print-Tuning-Guide/articles/cooling_and_layer_times.html)
+- **Signs of overheating:**
+  - Curling/warping on small features
+  - Poor overhangs
+  - Blobby surfaces on detailed areas
+- **Solutions:**
+  1. **Increase fan speed:**
+     - PLA: "more is better" - 100% usually fine
+     - ABS: needs cooling even in heated chamber
+     - PETG: moderate (50-70%)
+  2. **Minimum layer time:**
+     - Set in slicer (usually 10-15 seconds)
+     - Slows down print on small layers
+     - ABS: minimum 15 seconds recommended
+  3. **Print multiple objects:**
+     - Spread across bed
+     - Gives each object time to cool between layers
+- **Slicer settings:**
+  - "Minimum layer time" or "Slow down if layer print time is below"
+  - "Lift head" option for very small layers
+- **Notes:**
+  - Keep fan speed consistent to avoid banding
+  - Small/tall objects need more cooling time
+- **Redo when:** Different filament type, chamber temperature changes
+
+---
+
+## Slicer Calibrations
+
+### Infill/Perimeter Overlap
+- **Status:** [ ] Pending
+- **Priority:** Low - Cosmetic improvement
+- **Reference:** [Ellis Guide - Overlap](https://ellis3dp.com/Print-Tuning-Guide/articles/infill_perimeter_overlap.html)
+- **Problem:** Small gaps/pinholes where top infill meets perimeters
+- **Solutions:**
+  1. **Preferred:** Use "Not connected" top infill (SuperSlicer)
+     - Works with default 25% overlap
+  2. **Alternative:** Increase overlap setting
+     - PrusaSlicer: "Infill/perimeter overlap"
+     - SuperSlicer: "Infill/perimeters encroachment"
+     - Increase until pinholes disappear (~40%)
+- **Notes:**
+  - This is cosmetic, not a flow/PA calibration issue
+  - Different slicers handle this differently
+- **Redo when:** Slicer change, major profile changes
+
+### First Layer Settings
+- **Status:** [ ] Pending
+- **Priority:** Medium - Bed adhesion and print success
+- **Typical settings:**
+  - First layer height: 0.2-0.3mm (or 75% of nozzle)
+  - First layer speed: 20-30mm/s
+  - First layer flow: 100-105%
+  - First layer line width: 120% of nozzle
+- **Procedure:**
+  1. Print first layer test pattern
+  2. Verify even squish across entire bed
+  3. Lines should be slightly transparent, well adhered
+  4. No gaps, no elephant foot
+- **Notes:**
+  - Adjust Z offset for fine-tuning, not flow
+  - Bed cleanliness is critical (IPA 90%+)
+- **Redo when:** After Z offset or bed mesh changes
 
 ---
 
@@ -226,21 +371,13 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 - **Expected:** Diagonals within 0.5mm of each other
 - **Redo when:** Frame adjustments, mechanical changes
 
-### First Layer Test
-- **Status:** [ ] Pending
-- **Procedure:**
-  1. Print first layer test pattern
-  2. Verify even squish across entire bed
-  3. No gaps, no overextrusion
-- **Expected:** Consistent lines, slight transparency
-- **Redo when:** After Z offset or bed mesh changes
-
 ---
 
 ## Calibration Order (Recommended)
 
 For new setup or major changes, follow this order:
 
+### Phase 1: Machine Setup (One-time)
 1. **Mechanical checks** - Belt tension, frame square
 2. **PID tuning** - Stable temperatures first
 3. **Probe accuracy** - Verify sensor reliability
@@ -249,10 +386,19 @@ For new setup or major changes, follow this order:
 6. **E-steps** - Correct extrusion volume
 7. **Input Shaper** - Motion quality
 8. **Skew** - Dimensional accuracy
-9. **Pressure Advance** - Per filament
-10. **Flow rate** - Per filament
-11. **Retraction** - Per filament
-12. **Temperature tower** - Per filament
+9. **Max Volumetric Flow** - Know your hotend's limit
+
+### Phase 2: Per-Filament Tuning
+10. **Temperature tower** - Find optimal temp range
+11. **Pressure Advance** - Sharp corners, consistent extrusion
+12. **Extrusion Multiplier** - Dimensional accuracy
+13. **Retraction** - Eliminate stringing
+14. **Cooling settings** - Prevent overheating
+
+### Phase 3: Fine-tuning (Optional)
+15. **Max velocity/accel test** - For speed optimization
+16. **First layer calibration** - Perfect adhesion
+17. **Infill/perimeter overlap** - Cosmetic improvements
 
 ---
 
@@ -276,9 +422,27 @@ BED_MESH_CALIBRATE PROFILE=default
 SHAPER_CALIBRATE AXIS=X
 SHAPER_CALIBRATE AXIS=Y
 
+# Pressure Advance test
+SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY=1 ACCEL=500
+SET_PRESSURE_ADVANCE ADVANCE=0
+# Then print PA pattern and find best value
+SET_PRESSURE_ADVANCE ADVANCE=0.04  # Example value
+
+# Test extrusion for max volumetric flow
+G1 E100 F300  # 5mm/s - start slow
+G1 E100 F600  # 10mm/s - increase gradually
+
 # Save all changes
 SAVE_CONFIG
 ```
+
+## Useful Test Models
+
+- **Pressure Advance:** [Klipper PA Pattern](https://www.klipper3d.org/Pressure_Advance.html)
+- **Retraction:** SuperSlicer built-in tower or [Retraction Calibration](https://www.thingiverse.com/thing:2563909)
+- **Temperature Tower:** [Smart Temperature Tower](https://www.thingiverse.com/thing:2729076)
+- **Flow/EM Test:** 30x30x3mm cube with top surface inspection
+- **First Layer:** [First Layer Test](https://www.thingiverse.com/thing:2187071)
 
 ---
 
