@@ -278,28 +278,28 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 - **Redo when:** New filament brand/type/color
 
 ### Maximum Volumetric Flow Rate
-- **Status:** [ ] Pending
+- **Status:** [x] Completed (2026-02-01)
 - **Priority:** HIGH - Prevents under-extrusion at high speeds
 - **Reference:** [Ellis Guide - Max Volumetric Flow](https://ellis3dp.com/Print-Tuning-Guide/articles/determining_max_volumetric_flow_rate.html)
 - **What it is:** Maximum plastic volume (mm³/s) your hotend can melt
 - **Why it matters:** Exceeding this limit causes under-extrusion, grinding, skipping
-- **Procedure:**
-  1. Heat hotend to printing temperature
-  2. Mark 100mm of filament with tape
-  3. Extrude at increasing speeds (mm/min = mm/s × 60)
-  4. At each speed, verify ~100mm enters extruder
-  5. Note speed where it starts falling short
-  6. Convert to volumetric: `mm³/s = mm/s × 2.4` (for 1.75mm filament)
+- **Test Results (2026-02-01 @ 205°C PLA):**
+  | Speed | Volumetric | Extruded | Status |
+  |-------|------------|----------|--------|
+  | 5 mm/s (F300) | ~12 mm³/s | 104mm | ✅ |
+  | 7 mm/s (F420) | ~17 mm³/s | 102mm | ✅ |
+  | 9 mm/s (F540) | ~22 mm³/s | 100.5mm | ✅ |
+  | 11 mm/s (F660) | ~26 mm³/s | 96mm | ❌ |
+- **Maximum tested:** ~22 mm³/s
+- **Configured value:** 18 mm³/s (with safety margin)
+- **Configured in:** OrcaSlicer filament profile (PLA)
 - **Typical values:**
   - Stock hotend (V6 style): 8-12 mm³/s
   - High-flow hotend (Volcano, Dragon HF): 15-25 mm³/s
   - CHT nozzle: +30-50% over standard
-- **How to use:**
-  - Set in slicer as "Max volumetric speed" limit
-  - Or calculate max print speed: `speed = volumetric_flow / (layer_height × line_width)`
 - **Notes:**
+  - Result is above average for stock hotend
   - Higher temps = higher flow (with tradeoffs)
-  - Use value slightly below test results
 - **Redo when:** Hotend change, nozzle change, different filament type
 
 ---
@@ -474,6 +474,7 @@ Calibrazioni da ripetere per ogni nuovo tipo di filamento:
 - [ ] Pressure Advance (tipico: 0.04-0.08 direct drive)
 - [ ] Extrusion Multiplier (tipico: 0.93-0.97)
 - [ ] Retraction (tipico: 0.5-1.5mm, potrebbe servire più del PLA)
+- [ ] Max Volumetric Flow (tipico: simile o leggermente inferiore al PLA)
 
 ### Equipment TODO
 - [ ] **Filament Dryer** - necessario per calibrazione retraction accurata
