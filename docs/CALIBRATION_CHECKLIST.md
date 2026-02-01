@@ -231,8 +231,13 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 - **Redo when:** Different filament brand/type
 
 ### Retraction
-- **Status:** [ ] Pending
+- **Status:** [~] Needs redo with dry filament
 - **Priority:** Medium - Stringing prevention
+- **Temporary values:**
+  | Filament | Distance | Speed | Notes |
+  |----------|----------|-------|-------|
+  | PLA | 1.5mm | 35mm/s | Test inconclusive - wet filament |
+  | PETG | TODO | TODO | - |
 - **Reference:** [Ellis Guide - Retraction](https://ellis3dp.com/Print-Tuning-Guide/articles/retraction.html)
 - **Starting values:**
   - Direct drive: 0.5mm @ 35mm/s
@@ -469,6 +474,9 @@ Calibrazioni da ripetere per ogni nuovo tipo di filamento:
 - [ ] Pressure Advance (tipico: 0.04-0.08 direct drive)
 - [ ] Extrusion Multiplier (tipico: 0.93-0.97)
 - [ ] Retraction (tipico: 0.5-1.5mm, potrebbe servire più del PLA)
+
+### Equipment TODO
+- [ ] **Filament Dryer** - necessario per calibrazione retraction accurata
 
 ### Altri filamenti (quando usati)
 - [ ] ABS/ASA - richiede camera chiusa
