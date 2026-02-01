@@ -141,7 +141,7 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
   | X | mzv | 54.8 Hz |
   | Y | mzv | 23.0 Hz |
   | Z | 3hump_ei | 77.6 Hz |
-- **Recommended max_accel:** 1550 mm/s²
+- **Recommended max_accel:** 1550 mm/s² (updated to 2100 after TEST_SPEED)
 - **Notes:**
   - Y frequency is lower than X, likely due to bed mass on Y axis (bed slinger design)
   - Z shaper optional but configured
@@ -149,9 +149,15 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 - **Redo when:** After major mechanical changes
 
 ### Max Velocity/Acceleration Test
-- **Status:** [ ] Pending
+- **Status:** [x] Completed (2026-02-01)
 - **Priority:** Low (reliability > speed)
 - **Reference:** [Ellis Guide - Max Speeds](https://ellis3dp.com/Print-Tuning-Guide/articles/determining_max_speeds_accels.html)
+- **Test Results:**
+  | Parameter | Tested Max | Configured (with margin) |
+  |-----------|------------|--------------------------|
+  | max_accel | 2500 mm/s² | 2100 mm/s² |
+  | max_z_accel | - | 2100 mm/s² |
+  | max_velocity | 200 mm/s | 200 mm/s (not tested) |
 - **Procedure:**
   1. Complete Input Shaper first
   2. Set `max_velocity` to a known safe value
@@ -160,9 +166,8 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
   5. Set final value 15% below maximum found
   6. Repeat process for velocity using Prusa calculator
 - **Notes:**
-  - Heat printer fully before testing
-  - Maximum values may not be practical for daily printing
-  - Input Shaper already provides recommended max_accel
+  - Previous max_accel from Input Shaper: 1550 mm/s²
+  - New max_accel after TEST_SPEED: 2100 mm/s² (+35%)
 - **Redo when:** After Input Shaper, mechanical upgrades
 
 ---
