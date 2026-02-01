@@ -170,9 +170,14 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 ## Extrusion Calibrations (Per Filament)
 
 ### Pressure Advance
-- **Status:** [ ] Pending
+- **Status:** [x] Completed (2026-02-01)
 - **Priority:** HIGH - Better corners and reduced stringing
 - **Reference:** [Ellis Guide - Pressure Advance](https://ellis3dp.com/Print-Tuning-Guide/articles/pressure_linear_advance/introduction.html)
+- **Results:**
+  | Filament | PA Value | Date |
+  |----------|----------|------|
+  | PLA (generic) | 0.065 | 2026-02-01 |
+- **Configured in:** OrcaSlicer filament profile (G-code)
 - **Command:** `SET_PRESSURE_ADVANCE ADVANCE=X`
 - **Methods (in order of recommendation):**
   1. **Pattern Method** (most accurate) - Print test pattern, measure best section
