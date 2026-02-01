@@ -177,6 +177,7 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
   | Filament | PA Value | Date |
   |----------|----------|------|
   | PLA (generic) | 0.065 | 2026-02-01 |
+  | PETG | TODO | - |
 - **Configured in:** OrcaSlicer filament profile (G-code)
 - **Command:** `SET_PRESSURE_ADVANCE ADVANCE=X`
 - **Methods (in order of recommendation):**
@@ -200,9 +201,15 @@ Complete calibration checklist for achieving BambuLab-level print quality and re
 - **Redo when:** Different filament, nozzle change, hotend change
 
 ### Extrusion Multiplier (Flow Rate)
-- **Status:** [ ] Pending
+- **Status:** [x] Completed (2026-02-01)
 - **Priority:** HIGH - Dimensional accuracy and surface quality
 - **Reference:** [Ellis Guide - Extrusion Multiplier](https://ellis3dp.com/Print-Tuning-Guide/articles/extrusion_multiplier.html)
+- **Results:**
+  | Filament | Flow | Date |
+  |----------|------|------|
+  | PLA (generic) | 0.94 | 2026-02-01 |
+  | PETG | TODO | - |
+- **Configured in:** OrcaSlicer filament profile
 - **Procedure (Ellis Method):**
   1. Slice 30x30x3mm cubes with EM variations of 1-2% (e.g., 0.96, 0.98, 1.00)
   2. Settings:
@@ -450,6 +457,22 @@ SAVE_CONFIG
 - **Temperature Tower:** [Smart Temperature Tower](https://www.thingiverse.com/thing:2729076)
 - **Flow/EM Test:** 30x30x3mm cube with top surface inspection
 - **First Layer:** [First Layer Test](https://www.thingiverse.com/thing:2187071)
+
+---
+
+## Per-Filament Calibration TODO
+
+Calibrazioni da ripetere per ogni nuovo tipo di filamento:
+
+### PETG
+- [ ] Temperature Tower (tipico: 230-250°C)
+- [ ] Pressure Advance (tipico: 0.04-0.08 direct drive)
+- [ ] Extrusion Multiplier (tipico: 0.93-0.97)
+- [ ] Retraction (tipico: 0.5-1.5mm, potrebbe servire più del PLA)
+
+### Altri filamenti (quando usati)
+- [ ] ABS/ASA - richiede camera chiusa
+- [ ] TPU - PA molto basso o disabilitato, retraction minima
 
 ---
 
