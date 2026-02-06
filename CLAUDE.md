@@ -37,10 +37,10 @@ Project to convert an Artillery Sidewinder X1 into a reliable, precise, and sile
 
 ## Calibration Status
 
-~60% complete. See [Calibration Checklist](docs/CALIBRATION_CHECKLIST.md) for details.
+~75% complete. See [Calibration Checklist](docs/CALIBRATION_CHECKLIST.md) for details.
 
-**Completed:** PID, E-steps, Z-offset, Bed Mesh, Skew, Probe Accuracy, Input Shaper
-**Pending:** PA (highest priority), Flow, Retraction, Temperature Tower
+**Completed:** PID, E-steps, Z-offset, Bed Mesh, Skew, Probe Accuracy, Input Shaper, Max Velocity/Accel, PA, Flow, Max Volumetric Flow
+**Pending:** Retraction (redo with dry filament), Temperature Tower, Cooling, First Layer, Infill/Perimeter Overlap
 
 ## Repository Structure
 

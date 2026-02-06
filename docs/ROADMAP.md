@@ -8,12 +8,12 @@ Path to achieving "press-print-and-forget" BambuLab-level reliability.
 
 ```
 Phase 1: Foundation     [=========-] 90%
-Phase 2: Motion Quality [----------]  0%
-Phase 3: Extrusion      [==---------] 20%
+Phase 2: Motion Quality [==========] 100%
+Phase 3: Extrusion      [=======---] 70%
 Phase 4: Automation     [----------]  0%
 Phase 5: Refinements    [----------]  0%
 
-Overall Progress        [===-------] ~25%
+Overall Progress        [======----] ~55%
 ```
 
 ---
@@ -47,7 +47,7 @@ Overall Progress        [===-------] ~25%
 
 ### Status: Near Complete
 **Blockers:** None
-**Next action:** Probe accuracy test to verify GL-8H reliability
+**Next action:** First layer test print
 
 ---
 
@@ -55,23 +55,23 @@ Overall Progress        [===-------] ~25%
 
 *Input Shaper and motion optimization*
 
-### Hardware Required
-- [ ] Mount ADXL345 accelerometer (owned)
+### Hardware
+- [x] KUSBA v2.1 (ADXL345 via USB) mounted and working
 
 ### Calibrations
-- [ ] Input Shaper X axis
-- [ ] Input Shaper Y axis
-- [ ] Max velocity testing
-- [ ] Max acceleration testing
+- [x] Input Shaper X axis (mzv @ 54.8 Hz, 2026-01-29)
+- [x] Input Shaper Y axis (mzv @ 23.0 Hz, 2026-01-29)
+- [x] Max velocity testing (200 mm/s, 2026-02-01)
+- [x] Max acceleration testing (2100 mm/s², 2026-02-01)
 
-### Expected Benefits
-- Elimination of ringing/ghosting
+### Results
+- Ringing/ghosting eliminated
 - Cleaner vertical surfaces
-- Foundation for higher speeds (if desired)
+- max_accel: 2100 mm/s² (15% margin from 2500 tested)
+- max_velocity: 200 mm/s
 
-### Status: Not Started
-**Blockers:** ADXL345 needs mounting bracket
-**Next action:** Design/print ADXL345 mount for toolhead
+### Status: Complete
+**Completed:** 2026-02-01
 
 ---
 
@@ -80,25 +80,20 @@ Overall Progress        [===-------] ~25%
 *Per-filament tuning for dimensional accuracy*
 
 ### Calibrations (per filament type)
-- [ ] Pressure Advance
-- [ ] Flow rate
-- [ ] Retraction settings
+- [x] Pressure Advance (PLA: 0.065, 2026-02-01)
+- [x] Flow rate (PLA: 0.94, 2026-02-01)
+- [~] Retraction settings (PLA: temporary 1.5mm @ 35mm/s — redo with dry filament)
 - [ ] Temperature tower
+- [x] Max Volumetric Flow (PLA: 18 mm³/s configured, 2026-02-01)
 
-### Filament Profiles to Create
-- [ ] PLA (generic)
+### Filament Profiles
+- [~] PLA (generic) — mostly done, retraction + temp tower pending
 - [ ] PETG (generic)
 - [ ] TPU (if used)
 
-### Expected Benefits
-- Sharp corners without bulging
-- Accurate dimensions
-- No stringing
-- Optimal layer adhesion
-
-### Status: Not Started
-**Blockers:** Depends on Phase 2 for clean results
-**Next action:** Print PA tower after Input Shaper complete
+### Status: In Progress (~70%)
+**Blockers:** Filament dryer needed for accurate retraction test
+**Next action:** Temperature tower (PLA), then redo retraction with dry filament
 
 ---
 
@@ -150,10 +145,11 @@ Overall Progress        [===-------] ~25%
 
 | Priority | Item | Purpose | Status |
 |----------|------|---------|--------|
-| 1 | ADXL345 mount | Input Shaper calibration | Owned, needs mount |
-| 2 | BTT Microprobe V2 | Better PEI probing accuracy | Evaluating need |
-| 3 | Webcam | Monitoring + timelapse | Planned |
-| 4 | LED lighting | Camera visibility | Planned |
+| ~~1~~ | ~~ADXL345 mount~~ | ~~Input Shaper calibration~~ | ✅ Done (KUSBA v2.1) |
+| 1 | Filament dryer | Accurate retraction calibration | Needed |
+| 2 | Webcam | Monitoring + timelapse | Planned |
+| 3 | LED lighting | Camera visibility | Planned |
+| 4 | BTT Microprobe V2 | Better PEI probing accuracy | Not needed (GL-8H excellent) |
 
 ---
 
@@ -161,10 +157,10 @@ Overall Progress        [===-------] ~25%
 
 | Priority | Feature | Purpose | Dependency |
 |----------|---------|---------|------------|
-| 1 | Input Shaper config | Motion quality | ADXL345 mount |
-| 2 | Telegram bot | Notifications | Moonraker config |
-| 3 | Backup script | Config safety | None |
-| 4 | Timelapse | Documentation | Webcam |
+| ~~1~~ | ~~Input Shaper config~~ | ~~Motion quality~~ | ✅ Done |
+| 1 | Telegram bot | Notifications | Moonraker config |
+| 2 | Backup script | Config safety | None |
+| 3 | Timelapse | Documentation | Webcam |
 
 ---
 
